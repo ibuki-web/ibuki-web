@@ -11,6 +11,7 @@ type alias Model =
   , contentModel: ContentModel
   }
 
+initialModel : Model
 initialModel =
   {
     headerModel = initialHeaderModel

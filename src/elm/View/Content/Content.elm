@@ -1,7 +1,6 @@
 module View.Content.Content exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
 
 import Model.Content.Content exposing (..)
 import Updater.Content.ContentMessage exposing (..)

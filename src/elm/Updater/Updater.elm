@@ -1,8 +1,5 @@
 module Updater.Updater exposing (..)
 
-import Monocle.Optional exposing (Optional)
-import Monocle.Lens exposing (Lens)
-
 import Model.Model exposing (..)
 import Updater.Message exposing (..)
 import Updater.Header.Header exposing (..)
@@ -15,7 +12,7 @@ update message model =
     headerPartialUpdate = makePartialUpdaterLO headerModelLens headerMessageOpt headerUpdate message
     contentPartialUpdate = makePartialUpdaterLO contentModelLens contentMessageOpt contentUpdate message
   in
-    List.foldl (\upd mdl -> upd mdl) model [
+    concatPartialUpdater model [
       headerPartialUpdate
     , contentPartialUpdate
     ]

@@ -8,6 +8,7 @@ type alias TimelineModel =
     comments: List CommentModel
   }
 
+initialTimelineModel : TimelineModel
 initialTimelineModel =
   {
     comments = []
@@ -17,6 +18,6 @@ commentsLens : Lens TimelineModel (List CommentModel)
 commentsLens =
   let
     get content = content.comments
-    set comments content = { content| comments = comments }
+    set comments content = { content | comments = comments }
   in
     Lens get set
