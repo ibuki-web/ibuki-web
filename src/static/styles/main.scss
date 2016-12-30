@@ -3,3 +3,35 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 // can add Boostrap overrides, additional Sass/CSS below...
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.Header {
+  padding: 4px;
+  background: gray;
+  height: 38px;
+  width: 100%;
+}
+.Header-component {
+  margin: 4px;
+}
+.Header-content {
+  float: left;
+}
+.Header-content-switch {
+  height: 32px;
+  float: left;
+}
+.Header-content-switch img {
+  height: 28px;
+}
+.Header-user-pulldown {
+  float: right;
+  height: 32px;
+  width: 32px;
+}
+.Header-user-pulldown img {
+  height: 28px;
+}

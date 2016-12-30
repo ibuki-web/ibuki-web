@@ -1,15 +1,21 @@
 module Updater.Updater exposing (..)
 
+import Monocle.Optional exposing (Optional)
+import Monocle.Lens exposing (Lens)
+
 import Model.Model exposing (..)
 import Updater.Message exposing (..)
 import Updater.Header.Header exposing (..)
+import Updater.Content.Content exposing (..)
+import Updater.UpdaterCommon exposing (..)
 
 update : Message -> Model -> Model
 update message model =
   let
-    headerMessageMaybe = headerMessageOpt.getOption message
-    headerModel = headerModelLens.get model
+    headerPartialUpdate = makePartialUpdaterLO headerModelLens headerMessageOpt headerUpdate message
+    contentPartialUpdate = makePartialUpdaterLO contentModelLens contentMessageOpt contentUpdate message
   in
-    case headerMessageMaybe of
-      Just headerMessage -> model |> headerModelLens.set (headerUpdate headerMessage headerModel)
-      Nothing -> model
+    List.foldl (\upd mdl -> upd mdl) model [
+      headerPartialUpdate
+    , contentPartialUpdate
+    ]

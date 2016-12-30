@@ -1,6 +1,5 @@
 module View.Header.Header exposing (..)
 
-import String exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
@@ -16,13 +15,16 @@ headerView m =
     div [class "Header-component Header-content"] [
       p [] [text (clickedText (buttonClickCountLens.get m))]
     ]
-  , div [class "Header-component header-content-switch"] [
+  , div [class "Header-component Header-content-switch"] [
       button [onClick onClickMessage] [
-        h1 [] [text "Click Me!"]
+        img [alt "magnifier", src "./static/img/magnifier.svg"] []
       ]
+    ]
+  , div [class "Header-component Header-user-pulldown"] [
+      img [alt "user", src "./static/img/user.svg"] []
     ]
   ]
 
 
 clickedText : Int -> String
-clickedText n = String.repeat n "!"
+clickedText n = toString n
