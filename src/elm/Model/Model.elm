@@ -1,9 +1,10 @@
 module Model.Model exposing (..)
 
-import Monocle.Lens exposing (Lens)
+import Monocle.Lens exposing (Lens, compose)
 
 import Model.Header.Header exposing (HeaderModel, initialHeaderModel)
-import Model.Content.Content exposing (ContentModel, initialContentModel)
+import Model.Content.Content exposing (ContentModel, initialContentModel, routeLens)
+import Model.Route exposing (..)
 
 type alias Model =
   {
@@ -33,3 +34,6 @@ contentModelLens =
     set c m = { m | contentModel = c }
   in
     Lens get set
+
+routeOfRootModelLens : Lens Model Route
+routeOfRootModelLens = compose contentModelLens routeLens

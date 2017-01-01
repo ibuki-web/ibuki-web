@@ -30,3 +30,6 @@ makePartialUpdaterOO modelOpt messageOpt childUpdate parentMessage parentModel =
 concatPartialUpdater : m -> List (m -> m) -> m
 concatPartialUpdater model us =
   List.foldl (\f n -> f n) model us
+
+andThen : (m -> m) -> (m -> m) -> m -> m
+andThen f g model = g <| f model

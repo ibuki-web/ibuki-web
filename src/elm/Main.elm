@@ -1,21 +1,27 @@
 import Html exposing (..)
 
-import Time exposing (Time, second)
+import Navigation exposing (..)
+import UrlParser exposing (Parser, parseHash, parsePath, map, top, s)
 
 import View.View exposing (..)
 import Model.Model exposing (..)
 import Updater.Updater exposing (..)
 import Updater.Message exposing (..)
-
+import Updater.Route exposing (..)
+import Updater.Content.ContentMessage exposing (..)
 import Updater.Header.HeaderMessage exposing (..)
 
 -- APP
 main : Program Never Model Message
 main =
-  Html.program { init = init, view = view, update = update, subscriptions = always Sub.none }
+  Navigation.program (\loc -> FromContent (ChangeLocation loc)) { init = init, view = view, update = update, subscriptions = always Sub.none }
 
-init : (Model, Cmd Message)
-init = (initialModel, Cmd.none)
+init : Location -> (Model, Cmd Message)
+init location =
+  let
+    initialRoute = parseLocation location
+  in
+    (routeOfRootModelLens.set initialRoute initialModel, Cmd.none)
 
 --subscriptions : Model -> Sub Message
 --subscriptions model =

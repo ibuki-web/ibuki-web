@@ -16,3 +16,4 @@ update message model =
       headerPartialUpdate
     , contentPartialUpdate
     ], Cmd.none)
+

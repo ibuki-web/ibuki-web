@@ -1,11 +1,14 @@
 module Updater.Content.ContentMessage exposing (..)
 
+import Monocle.Lens exposing (Lens)
 import Monocle.Optional exposing (Optional)
+import Navigation exposing (..)
 
 import Updater.Content.TimelineMessage exposing (..)
 
 type ContentMessage
   = NoMessage
+  | ChangeLocation Location
   | FromTimeline TimelineMessage
 
 timelineMessageOpt : Optional ContentMessage TimelineMessage
