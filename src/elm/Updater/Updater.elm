@@ -9,11 +9,22 @@ import Updater.UpdaterCommon exposing (..)
 update : Message -> Model -> (Model, Cmd Message)
 update message model =
   let
-    headerPartialUpdate = makePartialUpdaterLO headerModelLens headerMessageOpt headerUpdate message
-    contentPartialUpdate = makePartialUpdaterLO contentModelLens contentMessageOpt contentUpdate message
+    headerUpdaterShift =
+      {
+        modelShift = headerModelLens
+      , messageShift = headerMessageOpt
+      , cmdMessageShift = FromHeader
+      }
+    headerPartialUpdate = makePartialUpdaterLO_ headerUpdaterShift headerUpdate message
+    contentUpdaterShift =
+      {
+        modelShift = contentModelLens
+      , messageShift = contentMessageOpt
+      , cmdMessageShift = FromContent
+      }
+    contentPartialUpdate = makePartialUpdaterLO_ contentUpdaterShift contentUpdate message
   in
-    (concatPartialUpdater model [
+    concatPartialUpdater model [
       headerPartialUpdate
     , contentPartialUpdate
-    ], Cmd.none)
-
+    ]
