@@ -3,10 +3,7 @@ module Updater.Content.Content exposing (..)
 import Updater.Content.ContentMessage exposing (..)
 import Updater.UpdaterCommon exposing (..)
 import Updater.Content.Timeline exposing (..)
-import Updater.Route exposing (..)
-import Model.Content.Content exposing (..)
-
-import Updater.Content.ContentMessage exposing (..)
+import Model.Route exposing (..)
 import Model.Content.Content exposing (..)
 
 contentUpdate : ContentMessage -> ContentModel -> ContentModel

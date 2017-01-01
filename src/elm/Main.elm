@@ -7,7 +7,7 @@ import View.View exposing (..)
 import Model.Model exposing (..)
 import Updater.Updater exposing (..)
 import Updater.Message exposing (..)
-import Updater.Route exposing (..)
+import Model.Route exposing (..)
 import Updater.Content.ContentMessage exposing (..)
 import Updater.Header.HeaderMessage exposing (..)
 
