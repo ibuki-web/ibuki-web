@@ -6,13 +6,13 @@ import Updater.Header.Header exposing (..)
 import Updater.Content.Content exposing (..)
 import Updater.UpdaterCommon exposing (..)
 
-update : Message -> Model -> Model
+update : Message -> Model -> (Model, Cmd Message)
 update message model =
   let
     headerPartialUpdate = makePartialUpdaterLO headerModelLens headerMessageOpt headerUpdate message
     contentPartialUpdate = makePartialUpdaterLO contentModelLens contentMessageOpt contentUpdate message
   in
-    concatPartialUpdater model [
+    (concatPartialUpdater model [
       headerPartialUpdate
     , contentPartialUpdate
-    ]
+    ], Cmd.none)
