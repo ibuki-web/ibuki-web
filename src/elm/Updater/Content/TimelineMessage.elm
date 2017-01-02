@@ -14,6 +14,10 @@ mockComment =
       id = "@poe"
     , name = "pompom"
     }
+  , topicName = "topic name"
+  , isImportant = True
+  , stared = True
+  , date = "2017/01/01"
   , title = Just "this is a title"
   , body = "body yeah!"
   }
