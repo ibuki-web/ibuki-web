@@ -1,30 +1,30 @@
 module Updater.Header.HeaderMessage exposing (..)
 
+import Http exposing (Error)
+import Updater.Api.Apis exposing (EchoResponse)
 import Monocle.Lens exposing (Lens)
 import Monocle.Optional exposing (Optional)
 
-type alias HeaderMessage =
-  {
-    buttonClicked: Bool
-  }
+type HeaderMessage
+  = NoMessage
+  | ButtonClicked
+  | ApplyEcho (Result Error EchoResponse)
 
 
-buttonClickedLens : Lens HeaderMessage Bool
-buttonClickedLens =
-  let
-    get m = m.buttonClicked
-    set p m = { m | buttonClicked = p }
-  in
-    Lens get set
+--buttonClickedLens : Lens HeaderMessage Bool
+--buttonClickedLens =
+--  let
+--    get m = m.buttonClicked
+--    set p m = { m | buttonClicked = p }
+--  in
+--    Lens get set
 
 
 emptyHeaderMessage : HeaderMessage
 emptyHeaderMessage =
-  {
-    buttonClicked = False
-  }
+  NoMessage
 
 
-onClickMessage : HeaderMessage
-onClickMessage =
-  buttonClickedLens.set True emptyHeaderMessage
+onClickButtonMessage : HeaderMessage
+onClickButtonMessage =
+  ButtonClicked

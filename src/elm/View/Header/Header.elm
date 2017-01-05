@@ -13,10 +13,10 @@ headerView : HeaderModel -> Html HeaderMessage
 headerView m =
   div [class "Header"] [
     div [class "Header-component Header-content"] [
-      p [] [text (clickedText (buttonClickCountLens.get m))]
+      p [] [text (toString <| buttonClickCountLens.get m)]
     ]
   , div [class "Header-component Header-content-switch"] [
-      button [onClick onClickMessage] [
+      button [onClick onClickButtonMessage] [
         img [alt "magnifier", src "./static/img/magnifier.svg"] []
       ]
     ]
