@@ -22,7 +22,7 @@ type alias RawRequest a =
 
 
 host : Url
-host = "http://localhost:9292"
+host = "https://ibuki-service.com"
 
 
 (</>) : Url -> String -> Url
