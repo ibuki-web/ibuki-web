@@ -7,6 +7,7 @@ import Json.Decode exposing (Decoder, field, map)
 import Updater.Api.Api exposing (..)
 
 
+(=>) : a -> b -> (a, b)
 (=>) = (,)
 
 

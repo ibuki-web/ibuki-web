@@ -5,8 +5,6 @@ import Json.Encode as JsonEncode
 import Json.Decode as JsonDecode
 import Time exposing (..)
 
-import Lib.Maybe exposing (..)
-
 type alias Url = String
 type alias Param = (String, String)
 type alias RawRequest a =

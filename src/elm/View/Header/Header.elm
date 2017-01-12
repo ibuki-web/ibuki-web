@@ -6,8 +6,7 @@ import Html.Events exposing (onClick)
 
 import Model.Header.Header exposing (..)
 import Updater.Header.HeaderMessage exposing (..)
-import Updater.Header.Header exposing (..)
-import View.Common exposing (..)
+
 
 headerView : HeaderModel -> Html HeaderMessage
 headerView m =
