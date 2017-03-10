@@ -1,7 +1,7 @@
 module View.Common exposing (..)
 
 import Html exposing (Attribute, Html)
-import Html.Attributes exposing (property)
+import Html.Attributes exposing (attribute, property)
 import Json.Encode as Json
 import Monocle.Optional exposing (Optional)
 
@@ -12,29 +12,34 @@ toNoMessage : b -> Html a -> Html b
 toNoMessage noMessage html = Html.map (\_ -> noMessage) html
 
 
-stringProperty : String -> String -> Attribute msg
-stringProperty name string =
-  property name (Json.string string)
+ariaLabelledby : String -> Attribute msg
+ariaLabelledby =
+   attribute "aria-labelledby"
+
+
+ariaHaspopup : String -> Attribute msg
+ariaHaspopup =
+   attribute "aria-haspopup"
 
 
 ariaExpanded : String -> Attribute msg
-ariaExpanded value =
-   stringProperty "aria-expanded" value
+ariaExpanded =
+   attribute "aria-expanded"
 
 
 role : String -> Attribute msg
-role value =
-   stringProperty "role" value
+role =
+   attribute "role"
 
 
 dataToggle : String -> Attribute msg
-dataToggle value =
-   stringProperty "data-toggle" value
+dataToggle =
+   attribute "data-toggle"
 
 
 dataTarget : String -> Attribute msg
-dataTarget value =
-   stringProperty "data-target" value
+dataTarget =
+   attribute "data-target"
 
 type alias Style = List (String, String)
 

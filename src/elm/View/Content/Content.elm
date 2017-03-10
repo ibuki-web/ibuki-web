@@ -42,4 +42,4 @@ contentBodyView route model =
           Just timelineModel -> mapFromChildHtml timelineMessageOpt NoMessage (timelineView timelineModel)
           Nothing -> div [] []
 
-      _ -> h1 [] [text "OMG"]
+      _ -> h1 [] [text "This URL is not available :("]

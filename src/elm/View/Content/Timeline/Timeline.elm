@@ -13,7 +13,7 @@ timelineView : TimelineModel -> Html TimelineMessage
 timelineView model =
   div [] [
     button [onClick onClickAddCommentButton, class "btn btn-success", style [("text-color", "#fff")]] [
-      h3 [] [text "Add Comment!!"]
+      text "Add Comment!!"
     ]
   , div [] (List.map (\comment -> toNoMessage NoMessage (commentView comment)) (commentsLens.get model))
   ]

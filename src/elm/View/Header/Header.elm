@@ -1,12 +1,12 @@
 module View.Header.Header exposing (..)
 
 import Html exposing (Html, a, button, div, form, img, input, li, nav, p, span, text, ul)
-import Html.Attributes exposing (alt, class, href, id, placeholder, src, style, type_)
+import Html.Attributes exposing (alt, attribute, class, href, id, placeholder, src, style, type_)
 import Html.Events exposing (onClick, onInput)
 
 import Model.Header.Header exposing (..)
 import Updater.Header.HeaderMessage exposing (..)
-import View.Common exposing (Style, ariaExpanded, dataTarget, dataToggle, role)
+import View.Common exposing (Style, ariaExpanded, ariaHaspopup, ariaLabelledby, dataTarget, dataToggle, role)
 
 
 (=>) = (,)
@@ -37,16 +37,17 @@ headerView m =
           ]
         ]
       , ul [class "nav navbar-nav navbar-right"] [
-          li [class "dropdown"] [
-            a [href "#menu",class "dropdown-toggle", dataToggle "dropdown", role "button", ariaExpanded "false"] [
-              text "Dropdown "
-            , span [class "caret"] []
---              img [src "./static/img/user.svg", style ["height" => "38px", "weight" => "38px"]] []
-            ]
-          , ul [class "dropdown-menu", role "menu"] [
-              li [] [ a [href "#menu"] [text "Home"] ]
-            , li [] [ a [href "#menu"] [text "Hk"] ]
-            , li [] [ a [href "#menu"] [text "afsje"] ]
+          li [] [
+            div [class "dropdown"] [
+              button [class "btn btn-default dropdown-toggle", type_ "button", id "dropdownmenu", dataToggle "dropdown"] [
+                text "Dropdown", span [class "caret"] []
+              ]
+            , ul [class "dropdown-menu", ariaLabelledby "dropdownmenu"] [
+                li [] [a [href "#"] [text "one"]]
+              , li [] [a [href "#"] [text "two"]]
+              , li [class "divider"] []
+              , li [] [a [href "#"] [text "three"]]
+              ]
             ]
           ]
         ]
