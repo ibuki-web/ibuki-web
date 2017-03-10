@@ -6,10 +6,19 @@ import Updater.UpdaterCommon exposing (..)
 import Updater.Content.Timeline exposing (..)
 import Model.Route exposing (..)
 import Model.Content.Content exposing (..)
+import Updater.Content.Top exposing (topUpdate)
 
 contentUpdate : ContentMessage -> ContentModel -> (ContentModel, Cmd ContentMessage)
 contentUpdate message model =
   let
+    topUpdaterShift =
+      {
+        modelShift = topModelOpt
+      , messageShift = topMessageOpt
+      , cmdMessageShift = FromTop
+      }
+    topPartialUpdater = makePartialUpdaterOO_ topUpdaterShift topUpdate message
+
     timelineUpdaterShift =
       {
         modelShift = timelineModelOpt
@@ -27,13 +36,18 @@ contentUpdate message model =
     experimentPartialUpdater = makePartialUpdaterOO_ experimentUpdaterShift experimentUpdate message
   in
     andThen (routeUpdate message) (\m -> concatPartialUpdater m [
-      timelinePartialUpdater
+      topPartialUpdater
+    , timelinePartialUpdater
     , experimentPartialUpdater
     ]) model
 
 routeUpdate : ContentMessage -> ContentModel -> (ContentModel, Cmd ContentMessage)
 routeUpdate message model =
   (case message of
-    ChangeLocation location -> routeLens.set (parseLocation location) model
+    ChangeLocation location ->
+      case parseLocation location of
+        NoRoute -> model
+
+        _ as loc -> routeLens.set loc model
 
     _ -> model, Cmd.none)

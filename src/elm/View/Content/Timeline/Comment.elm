@@ -8,8 +8,9 @@ import Model.Domain.Comment exposing (..)
 
 commentView : CommentModel -> Html {}
 commentView model =
-  div [class "comment"] [
+  div [class "panel panel-default com"] [
     commentAttrView model
+  , div [class "divider"] []
   , commentBodyView model
   ]
 
@@ -24,7 +25,7 @@ commentAttrView model =
     stared = staredLens.get model
     date = dateLens.get model
   in
-    div [class "comment-attrs"] [
+    div [class "panel-body"] [
       div [class "topic-attr"] [
         div [class "attribute-text topic-name"] [
           text topicName
@@ -69,7 +70,7 @@ commentBodyView model =
     title = getOrElse (titleOpt.getOption model) "[NoTitle]"
     body = bodyLens.get model
   in
-    div [class "comment-body"] [
+    div [class "panel-body"] [
       div [class "title"] [
         text title
       ]

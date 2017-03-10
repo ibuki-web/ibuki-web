@@ -1,6 +1,7 @@
 module Model.Content.Content exposing (..)
 
 import Model.Content.Experiment exposing (ExperimentModel, initialExperimentModel)
+import Model.Content.Top exposing (TopModel, initialTopModel)
 import Monocle.Optional exposing (Optional)
 import Monocle.Lens exposing (Lens)
 
@@ -9,7 +10,8 @@ import Model.Route exposing (..)
 
 type alias ContentModel =
   {
-    timelineModel: Maybe TimelineModel
+    topModel: Maybe TopModel
+  , timelineModel: Maybe TimelineModel
   , experimentModel: Maybe ExperimentModel
   , route: Route
   }
@@ -17,10 +19,19 @@ type alias ContentModel =
 initialContentModel : ContentModel
 initialContentModel =
   {
-    timelineModel = Just initialTimelineModel
+    topModel = Just initialTopModel
+  , timelineModel = Just initialTimelineModel
   , experimentModel = Just initialExperimentModel
-  , route = Top
+  , route = Experiment
   }
+
+topModelOpt : Optional ContentModel TopModel
+topModelOpt =
+  let
+    getOption content = content.topModel
+    set top content = { content | topModel = Just top }
+  in
+    Optional getOption set
 
 timelineModelOpt : Optional ContentModel TimelineModel
 timelineModelOpt =

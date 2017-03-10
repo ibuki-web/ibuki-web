@@ -1,6 +1,7 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss';
-@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+// @import '~bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss';
+// @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import "bootstrap.min.css";
 
 // can add Boostrap overrides, additional Sass/CSS below...
 *{
@@ -10,7 +11,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 .Header {
   padding: 4px;
-  background: gray;
+  background: #eeffee;
   height: 38px;
   width: 100%;
 }
@@ -35,6 +36,13 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   height: 28px;
 }
 
+.com {
+  background: #fafafa;
+  width: 500px;
+  margin-right: auto;
+  margin-left : auto;
+}
+
 .comment {
   margin: 10px;
   padding: 10px;
@@ -47,31 +55,31 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 .comment .comment-attrs {
   height: 90px;
 }
-.comment-attrs .attribute-text {
+.attribute-text {
   height: 26px;
   line-height: 26px;
   margin: 2px;
   float: left;
 }
-.comment-attrs .attribute-img img {
+.attribute-img img {
   height: 26px;
   line-height: 26px;
   margin: 2px;
   float: left;
 }
-.comment-attrs .topic-attr {
+.topic-attr {
   height: 30px;
 }
-.topic-attr .important-marker img {
+.important-marker img {
   float: right;
 }
-.comment-attrs .user-attr {
+.user-attr {
   height: 30px;
 }
-.comment-attrs .comment-attr {
+.comment-attr {
   height: 30px;
 }
-.comment-attr .date {
+.date {
   float: right;
 }
 
@@ -79,6 +87,6 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   margin: 4px;
   border-top: thin solid #888;
 }
-.comment-body .title {
+.title {
   padding: 8px;
 }

@@ -4,7 +4,8 @@ import Navigation exposing (..)
 import UrlParser exposing (..)
 
 type Route
-  = Top
+  = NoRoute
+  | Top
   | Hoge
   | Experiment
 
@@ -13,7 +14,7 @@ type Route
 matchers : Parser (Route -> a) a
 matchers =
     oneOf [
-      s "/"           ||> Top
+      s ""            ||> Top
     , s "experiment"  ||> Experiment
     , s "hoge"        ||> Hoge
     ]
@@ -25,4 +26,4 @@ parseLocation location =
             route
 
         Nothing ->
-            Top
+            NoRoute

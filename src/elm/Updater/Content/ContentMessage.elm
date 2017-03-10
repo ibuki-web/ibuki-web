@@ -6,12 +6,25 @@ import Navigation exposing (..)
 
 import Updater.Content.ExperimentMessage exposing (ExperimentMessage)
 import Updater.Content.TimelineMessage exposing (..)
+import Updater.Content.TopMessage exposing (TopMessage)
 
 type ContentMessage
   = NoMessage
   | ChangeLocation Location
+  | FromTop TopMessage
   | FromTimeline TimelineMessage
   | FromExperiment ExperimentMessage
+
+topMessageOpt : Optional ContentMessage TopMessage
+topMessageOpt =
+  let
+    getOption content =
+      case content of
+        FromTop top -> Just top
+        _ -> Nothing
+    set top content = FromTop top
+  in
+    Optional getOption set
 
 timelineMessageOpt : Optional ContentMessage TimelineMessage
 timelineMessageOpt =

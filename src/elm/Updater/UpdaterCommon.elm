@@ -68,9 +68,11 @@ concatPartialUpdater model us =
 
 combine : (model -> (model, Cmd message)) -> (model, List (Cmd message)) -> (model, List (Cmd message))
 combine updt modelcmds =
-  case modelcmds of
-    (model, cmds) -> case (updt model) of
-      (updatedModel, cmd) -> (updatedModel, cmd :: cmds)
+  let
+    (model, cmds) = modelcmds
+    (updatedModel, cmd) = updt model
+  in
+    (updatedModel, cmd :: cmds)
 
 mapModelCmd :  (cMessage -> pMessage) -> (pModel, Cmd cMessage) -> (pModel, Cmd pMessage)
 mapModelCmd f child =
@@ -81,6 +83,8 @@ mapModelCmd f child =
 
 andThen : (m -> (m, Cmd ms)) -> (m -> (m, Cmd ms)) -> m -> (m, Cmd ms)
 andThen f g model =
-  case f model of
-    (model1, cmd1) -> case g model1 of
-      (model2, cmd2) -> model2 ! [cmd1, cmd2]
+  let
+    (model1, cmd1) = f model
+    (model2, cmd2) = g model1
+  in
+    model2 ! [cmd1, cmd2]

@@ -1,20 +1,23 @@
 module View.Content.Content exposing (..)
 
-import Html exposing (..)
-
+import Html exposing (Html, div, h1, text)
+import Html.Attributes exposing (style)
 import Model.Content.Content exposing (..)
 import Model.Route exposing (..)
 import Updater.Content.ContentMessage exposing (..)
+import View.Common exposing (mapFromChildHtml)
 import View.Content.Timeline.Timeline exposing (..)
-import View.Common exposing (..)
 import View.Content.Experiment.Experiment exposing (experimentView)
+import View.Content.Top.Top exposing (topView)
+
+(=>) = (,)
 
 contentView : ContentModel -> Html ContentMessage
 contentView model =
   let
     route = routeLens.get model
   in
-    div [] [
+    div [style ["height" => "100%", "weight" => "100%"]] [
       contentBodyView route model
     ]
 
@@ -25,8 +28,8 @@ contentBodyView route model =
   in
     case route of
       Top ->
-        case timelineModelMaybe of
-          Just timelineModel -> mapFromChildHtml timelineMessageOpt NoMessage (timelineView timelineModel)
+        case topModelOpt.getOption model of
+          Just topModel -> mapFromChildHtml topMessageOpt NoMessage (topView topModel)
           Nothing -> div [] []
 
       Experiment ->
@@ -35,4 +38,8 @@ contentBodyView route model =
           Nothing -> div [] []
 
       Hoge ->
-        span [] [text "Hoge!!!!!!!!!!!"]
+        case timelineModelMaybe of
+          Just timelineModel -> mapFromChildHtml timelineMessageOpt NoMessage (timelineView timelineModel)
+          Nothing -> div [] []
+
+      _ -> h1 [] [text "OMG"]
