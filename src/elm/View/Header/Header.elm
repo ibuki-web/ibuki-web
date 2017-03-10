@@ -11,24 +11,28 @@ import View.Common exposing (Style, ariaExpanded, ariaHaspopup, ariaLabelledby, 
 
 (=>) = (,)
 
-
 headerView : HeaderModel -> Html HeaderMessage
 headerView m =
   nav [class "navbar navbar-default"] [
     div [class "container-fluid"] [
       div [class "navbar-header"] [
-        button [class "navbar-toggle collapsed", dataToggle "collapse", dataTarget "#bs-example-navbar-collapse-1"] []
+        button [class "navbar-toggle collapsed", dataToggle "collapse", dataTarget "#header-navbar-collapse"] [
+          span [class "sr-only"] [text "Toggle naviagtion"]
+        , span [class "icon-bar"] []
+        , span [class "icon-bar"] []
+        , span [class "icon-bar"] []
+        ]
       , a [class "navbar-brand", href "#/"] [text "ibuki"]
       ]
 
-    , div [class "collapse navbar-collapse", id "bs-example-navbar-collapse-1"] [
+    , div [class "collapse navbar-collapse", id "header-navbar-collapse"] [
         ul [class "nav navbar-nav"] [
-          li [] [
-            a [href "#/hoge"] [text "hoge"]
-          ]
-        , li [] [
-            a [href "#/experiment"] [text "experiment"]
-          ]
+            li [] [
+              a [href "#/hoge"] [text "hoge"]
+            ]
+          , li [] [
+              a [href "#/experiment"] [text "experiment"]
+            ]
         ]
       , form [class "navbar-form navbar-left", role "search"] [
           div [class "form-group"] [
@@ -38,7 +42,7 @@ headerView m =
         ]
       , ul [class "nav navbar-nav navbar-right"] [
           li [] [
-            div [class "dropdown"] [
+            div [class "dropdown", style ["margin-top" => "6px"]] [
               button [class "btn btn-default dropdown-toggle", type_ "button", id "dropdownmenu", dataToggle "dropdown"] [
                 text "Dropdown", span [class "caret"] []
               ]
