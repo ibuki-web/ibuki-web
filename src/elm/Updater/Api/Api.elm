@@ -18,9 +18,11 @@ type alias RawRequest a =
     withCredentials : Bool
   }
 
-
 host : Url
-host = "https://ibuki-service.com"
+host = "http://localhost:9898"
+
+host_ : Url
+host_ = "https://ibuki-service.com"
 
 
 (</>) : Url -> String -> Url

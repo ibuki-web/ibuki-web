@@ -1,6 +1,7 @@
 module Updater.Content.Content exposing (..)
 
 import Updater.Content.ContentMessage exposing (..)
+import Updater.Content.Experiment exposing (experimentUpdate)
 import Updater.UpdaterCommon exposing (..)
 import Updater.Content.Timeline exposing (..)
 import Model.Route exposing (..)
@@ -16,9 +17,18 @@ contentUpdate message model =
       , cmdMessageShift = FromTimeline
       }
     timelinePartialUpdater = makePartialUpdaterOO_ timelineUpdaterShift timelineUpdate message
+
+    experimentUpdaterShift =
+      {
+        modelShift = experimentModelOpt
+      , messageShift = experimentMessageOpt
+      , cmdMessageShift = FromExperiment
+      }
+    experimentPartialUpdater = makePartialUpdaterOO_ experimentUpdaterShift experimentUpdate message
   in
     andThen (routeUpdate message) (\m -> concatPartialUpdater m [
       timelinePartialUpdater
+    , experimentPartialUpdater
     ]) model
 
 routeUpdate : ContentMessage -> ContentModel -> (ContentModel, Cmd ContentMessage)

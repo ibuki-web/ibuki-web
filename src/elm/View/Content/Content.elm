@@ -7,6 +7,7 @@ import Model.Route exposing (..)
 import Updater.Content.ContentMessage exposing (..)
 import View.Content.Timeline.Timeline exposing (..)
 import View.Common exposing (..)
+import View.Content.Experiment.Experiment exposing (experimentView)
 
 contentView : ContentModel -> Html ContentMessage
 contentView model =
@@ -26,6 +27,11 @@ contentBodyView route model =
       Top ->
         case timelineModelMaybe of
           Just timelineModel -> mapFromChildHtml timelineMessageOpt NoMessage (timelineView timelineModel)
+          Nothing -> div [] []
+
+      Experiment ->
+        case experimentModelOpt.getOption model of
+          Just experimentModel -> mapFromChildHtml experimentMessageOpt NoMessage (experimentView experimentModel)
           Nothing -> div [] []
 
       Hoge ->

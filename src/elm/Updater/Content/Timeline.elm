@@ -1,5 +1,6 @@
 module Updater.Content.Timeline exposing (..)
 
+import Model.Content.Content exposing (ContentModel)
 import Updater.Content.TimelineMessage exposing (..)
 import Model.Content.Timeline exposing (..)
 

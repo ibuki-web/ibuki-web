@@ -6,14 +6,16 @@ import UrlParser exposing (..)
 type Route
   = Top
   | Hoge
+  | Experiment
 
 (||>) path route = path |> map route
 
 matchers : Parser (Route -> a) a
 matchers =
     oneOf [
-      s "/"      ||> Top
-    , s "hoge"   ||> Hoge
+      s "/"           ||> Top
+    , s "experiment"  ||> Experiment
+    , s "hoge"        ||> Hoge
     ]
 
 parseLocation : Location -> Route

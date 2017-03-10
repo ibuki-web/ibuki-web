@@ -4,15 +4,17 @@ import Monocle.Lens exposing (Lens)
 
 type alias HeaderModel =
   {
-    buttonClickCount: Int
+    buttonClickCount: String
+  , tagBody: String
   }
 
 initialHeaderModel =
   {
-    buttonClickCount = 0
+    buttonClickCount = ""
+  , tagBody = ""
   }
 
-buttonClickCountLens : Lens HeaderModel Int
+buttonClickCountLens : Lens HeaderModel String
 buttonClickCountLens =
   let
     get h = h.buttonClickCount

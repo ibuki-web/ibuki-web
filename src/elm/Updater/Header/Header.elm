@@ -1,25 +1,47 @@
 module Updater.Header.Header exposing (..)
 
 import Http
-import Updater.Api.Apis exposing (echoRequest)
+import Updater.Api.Apis exposing (echoRequest, tagPostRequest, decodeErrorResponse)
 import Model.Header.Header exposing (..)
 import Updater.Header.HeaderMessage exposing (..)
 
 headerUpdate : HeaderMessage -> HeaderModel -> (HeaderModel, Cmd HeaderMessage)
 headerUpdate message model =
   case message of
-    ButtonClicked ->
-      (model, Http.send ApplyEcho (echoRequest "hogehogepun"))
+    ChangeTagBody text ->
+      ({model | tagBody = text}, Cmd.none)
+
+    ButtonClicked text ->
+      (model, Http.send PostTag (tagPostRequest text))
 
     ApplyEcho (Ok echoResponse) ->
-      (buttonClickCountLens.set (String.length echoResponse.data) model, Cmd.none)
+      (buttonClickCountLens.set echoResponse.data model, Cmd.none)
+
+    PostTag (Ok tagPostResponse) ->
+      let
+        tex = case tagPostResponse of
+          Just body -> body.message
+          Nothing -> "SUCCESS!!!!"
+      in
+        (buttonClickCountLens.set tex model, Cmd.none)
+
+    PostTag (Err err) ->
+      let
+        message = case err of
+          Http.BadStatus response ->
+            case decodeErrorResponse response.body of
+              Ok errorResponse -> errorResponse.message
+              Err _ -> "error"
+          _ -> "hoge"
+      in
+        (buttonClickCountLens.set message model, Cmd.none)
 
     _ ->
       (model, Cmd.none)
 
-onClickButton : HeaderModel -> HeaderModel
-onClickButton model =
-  let
-    clickCount = buttonClickCountLens.get model
-  in
-    buttonClickCountLens.set (clickCount + 1) model
+--onClickButton : HeaderModel -> HeaderModel
+--onClickButton model =
+--  let
+--    clickCount = buttonClickCountLens.get model
+--  in
+--    buttonClickCountLens.set (clickCount + 1) model
