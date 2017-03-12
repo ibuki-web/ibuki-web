@@ -4,12 +4,15 @@ import Html exposing (Attribute, Html)
 import Html.Attributes exposing (attribute, property)
 import Json.Encode as Json
 import Monocle.Optional exposing (Optional)
+import Resource.Route exposing (Route, Routes, routes)
 
 mapFromChildHtml : Optional p c -> p -> Html c -> Html p
-mapFromChildHtml optional noMessage = Html.map (\message -> optional.set message noMessage)
+mapFromChildHtml optional noMessage =
+  Html.map (\message -> optional.set message noMessage)
 
 toNoMessage : b -> Html a -> Html b
-toNoMessage noMessage html = Html.map (\_ -> noMessage) html
+toNoMessage noMessage html =
+  Html.map (\_ -> noMessage) html
 
 
 ariaLabelledby : String -> Attribute msg
@@ -44,4 +47,5 @@ dataTarget =
 type alias Style = List (String, String)
 
 s : List Style -> Style
-s = List.concat
+s =
+  List.concat

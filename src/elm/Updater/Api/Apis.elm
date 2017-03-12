@@ -16,12 +16,14 @@ type alias EchoResponse =
     data: String
   }
 
+
 echoResponseDecoder : Decoder EchoResponse
 echoResponseDecoder =
   let
     data = field "data" Json.Decode.string
   in
     map EchoResponse data
+
 
 echoRequest : String -> Http.Request EchoResponse
 echoRequest data =
@@ -32,17 +34,20 @@ echoRequest data =
       |>| jsonBody (object ["data" => Json.Encode.string data])
       |>| jsonBodyExpect echoResponseDecoder
 
+
 type alias ErrorCode =
   {
     code: Int
   , desc: String
   }
 
+
 type alias ErrorResponse =
   {
     ecode: ErrorCode
   , message: String
   }
+
 
 errorResponseDecoder : Decoder ErrorResponse
 errorResponseDecoder =
@@ -54,11 +59,15 @@ errorResponseDecoder =
   in
     map2 ErrorResponse ecode message
 
+
 decodeErrorResponse : String -> Result String ErrorResponse
 decodeErrorResponse response =
   decodeString errorResponseDecoder response
 
-type alias TagResponse = Maybe ErrorResponse
+
+type alias TagResponse =
+  Maybe ErrorResponse
+
 
 tagPostRequest : String -> Http.Request TagResponse
 tagPostRequest body =
@@ -69,8 +78,12 @@ tagPostRequest body =
       |>| jsonBody (object ["body" => Json.Encode.string body])
       |>| expect (Http.expectStringResponse tagPostExpect)
 
+
 tagPostExpect : Http.Response String -> Result String TagResponse
 tagPostExpect response =
   case response.status.code of
-    201 -> Ok Nothing
-    _ -> Err <| response.body
+    201 ->
+      Ok Nothing
+
+    _ ->
+      Err <| response.body

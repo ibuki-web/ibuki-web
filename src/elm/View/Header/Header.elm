@@ -5,6 +5,7 @@ import Html.Attributes exposing (alt, attribute, class, href, id, placeholder, s
 import Html.Events exposing (onClick, onInput)
 
 import Model.Header.Header exposing (..)
+import Resource.Route exposing (routePathOf, routes)
 import Updater.Header.HeaderMessage exposing (..)
 import View.Common exposing (Style, ariaExpanded, ariaHaspopup, ariaLabelledby, dataTarget, dataToggle, role)
 
@@ -22,16 +23,16 @@ headerView m =
         , span [class "icon-bar"] []
         , span [class "icon-bar"] []
         ]
-      , a [class "navbar-brand", href "#/"] [text "ibuki"]
+      , a [class "navbar-brand", href <| routePathOf .top] [text "ibuki"]
       ]
 
     , div [class "collapse navbar-collapse", id "header-navbar-collapse"] [
         ul [class "nav navbar-nav"] [
             li [] [
-              a [href "#/hoge"] [text "hoge"]
+              a [href <| routePathOf .timeline] [text "timeline"]
             ]
           , li [] [
-              a [href "#/experiment"] [text "experiment"]
+              a [href <| routePathOf .experiment] [text "experiment"]
             ]
         ]
       , form [class "navbar-form navbar-left", role "search"] [
@@ -44,7 +45,8 @@ headerView m =
           li [] [
             div [class "dropdown", style ["margin-top" => "6px"]] [
               button [class "btn btn-default dropdown-toggle", type_ "button", id "dropdownmenu", dataToggle "dropdown"] [
-                text "Dropdown", span [class "caret"] []
+                img [alt "user", src "./static/img/user.svg", style ["height" => "20px", "width" => "20px"]] []
+              , span [class "caret"] []
               ]
             , ul [class "dropdown-menu", ariaLabelledby "dropdownmenu"] [
                 li [] [a [href "#"] [text "one"]]

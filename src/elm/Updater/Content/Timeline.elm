@@ -9,6 +9,9 @@ timelineUpdate message model =
   let
     showedComments = commentsLens.get model
   in
-    (case message of
-      AddComment comment -> commentsLens.set (comment :: showedComments) model
-      NoMessage -> model, Cmd.none)
+    case message of
+      AddComment comment ->
+        commentsLens.set (comment :: showedComments) model
+
+      NoMessage ->
+        model, Cmd.none

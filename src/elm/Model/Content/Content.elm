@@ -16,6 +16,7 @@ type alias ContentModel =
   , route: Route
   }
 
+
 initialContentModel : ContentModel
 initialContentModel =
   {
@@ -25,34 +26,50 @@ initialContentModel =
   , route = Experiment
   }
 
+
 topModelOpt : Optional ContentModel TopModel
 topModelOpt =
   let
-    getOption content = content.topModel
-    set top content = { content | topModel = Just top }
+    getOption content =
+      content.topModel
+
+    set top content =
+      { content | topModel = Just top }
   in
     Optional getOption set
+
 
 timelineModelOpt : Optional ContentModel TimelineModel
 timelineModelOpt =
   let
-    getOption content = content.timelineModel
-    set timeline content = { content| timelineModel = Just timeline }
+    getOption content =
+      content.timelineModel
+
+    set timeline content =
+      { content| timelineModel = Just timeline }
   in
     Optional getOption set
+
 
 experimentModelOpt : Optional ContentModel ExperimentModel
 experimentModelOpt =
   let
-    getOption content = content.experimentModel
-    set experiment content = { content| experimentModel = Just experiment }
+    getOption content =
+      content.experimentModel
+
+    set experiment content =
+      { content| experimentModel = Just experiment }
   in
     Optional getOption set
+
 
 routeLens : Lens ContentModel Route
 routeLens =
   let
-    get m = m.route
-    set r m = { m | route = r }
+    get m =
+      m.route
+
+    set r m =
+      { m | route = r }
   in
     Lens get set

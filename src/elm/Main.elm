@@ -12,6 +12,7 @@ main : Program Never Model Message
 main =
   Navigation.program (\loc -> FromContent (ChangeLocation loc)) { init = init, view = view, update = update, subscriptions = always Sub.none }
 
+
 init : Location -> (Model, Cmd Message)
 init location =
   let
