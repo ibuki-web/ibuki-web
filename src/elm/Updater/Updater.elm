@@ -15,13 +15,16 @@ update message model =
       , messageShift = headerMessageOpt
       , cmdMessageShift = FromHeader
       }
+
     headerPartialUpdate = makePartialUpdaterLO_ headerUpdaterShift headerUpdate message
+
     contentUpdaterShift =
       {
         modelShift = contentModelLens
       , messageShift = contentMessageOpt
       , cmdMessageShift = FromContent
       }
+
     contentPartialUpdate = makePartialUpdaterLO_ contentUpdaterShift contentUpdate message
   in
     concatPartialUpdater model [

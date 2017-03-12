@@ -17,7 +17,10 @@ initialHeaderModel =
 buttonClickCountLens : Lens HeaderModel String
 buttonClickCountLens =
   let
-    get h = h.buttonClickCount
-    set n h = { h | buttonClickCount = n }
+    get h =
+      h.buttonClickCount
+
+    set n h =
+      { h | buttonClickCount = n }
   in
     Lens get set

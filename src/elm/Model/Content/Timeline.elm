@@ -17,7 +17,10 @@ initialTimelineModel =
 commentsLens : Lens TimelineModel (List CommentModel)
 commentsLens =
   let
-    get content = content.comments
-    set comments content = { content | comments = comments }
+    get content =
+      content.comments
+
+    set comments content =
+      { content | comments = comments }
   in
     Lens get set

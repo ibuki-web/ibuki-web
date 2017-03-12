@@ -12,6 +12,7 @@ type alias Model =
   , contentModel: ContentModel
   }
 
+
 initialModel : Model
 initialModel =
   {
@@ -19,21 +20,30 @@ initialModel =
   , contentModel = initialContentModel
   }
 
+
 headerModelLens : Lens Model HeaderModel
 headerModelLens =
   let
-    get m = m.headerModel
-    set h m = { m | headerModel = h }
+    get m =
+      m.headerModel
+
+    set h m =
+      { m | headerModel = h }
   in
     Lens get set
+
 
 contentModelLens : Lens Model ContentModel
 contentModelLens =
   let
-    get m = m.contentModel
-    set c m = { m | contentModel = c }
+    get m =
+      m.contentModel
+
+    set c m =
+      { m | contentModel = c }
   in
     Lens get set
+
 
 routeOfRootModelLens : Lens Model Route
 routeOfRootModelLens = compose contentModelLens routeLens

@@ -9,7 +9,9 @@ import View.Header.Header exposing (..)
 import View.Content.Content exposing (..)
 import View.Common exposing (..)
 
+
 (=>) = (,)
+
 
 view : Model -> Html Message
 view m =

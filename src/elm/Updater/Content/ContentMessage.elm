@@ -8,6 +8,7 @@ import Updater.Content.ExperimentMessage exposing (ExperimentMessage)
 import Updater.Content.TimelineMessage exposing (..)
 import Updater.Content.TopMessage exposing (TopMessage)
 
+
 type ContentMessage
   = NoMessage
   | ChangeLocation Location
@@ -15,13 +16,18 @@ type ContentMessage
   | FromTimeline TimelineMessage
   | FromExperiment ExperimentMessage
 
+
 topMessageOpt : Optional ContentMessage TopMessage
 topMessageOpt =
   let
     getOption content =
       case content of
-        FromTop top -> Just top
-        _ -> Nothing
+        FromTop top ->
+          Just top
+
+        _ ->
+          Nothing
+
     set top content = FromTop top
   in
     Optional getOption set
@@ -31,8 +37,12 @@ timelineMessageOpt =
   let
     getOption content =
       case content of
-        FromTimeline timeline -> Just timeline
-        _ -> Nothing
+        FromTimeline timeline ->
+          Just timeline
+
+        _ ->
+          Nothing
+
     set timeline content = FromTimeline timeline
   in
     Optional getOption set
@@ -42,8 +52,12 @@ experimentMessageOpt =
   let
     getOption content =
       case content of
-        FromExperiment experiment -> Just experiment
-        _ -> Nothing
+        FromExperiment experiment ->
+          Just experiment
+
+        _ ->
+          Nothing
+
     set experiment content = FromExperiment experiment
   in
     Optional getOption set

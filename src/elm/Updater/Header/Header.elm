@@ -20,8 +20,11 @@ headerUpdate message model =
     PostTag (Ok tagPostResponse) ->
       let
         tex = case tagPostResponse of
-          Just body -> body.message
-          Nothing -> "SUCCESS!!!!"
+          Just body ->
+            body.message
+
+          Nothing ->
+            "SUCCESS!!!!"
       in
         (buttonClickCountLens.set tex model, Cmd.none)
 
@@ -30,18 +33,16 @@ headerUpdate message model =
         message = case err of
           Http.BadStatus response ->
             case decodeErrorResponse response.body of
-              Ok errorResponse -> errorResponse.message
-              Err _ -> "error"
-          _ -> "hoge"
+              Ok errorResponse ->
+                errorResponse.message
+
+              Err _ ->
+                "error"
+
+          _ ->
+            "hoge"
       in
         (buttonClickCountLens.set message model, Cmd.none)
 
     _ ->
       (model, Cmd.none)
-
---onClickButton : HeaderModel -> HeaderModel
---onClickButton model =
---  let
---    clickCount = buttonClickCountLens.get model
---  in
---    buttonClickCountLens.set (clickCount + 1) model

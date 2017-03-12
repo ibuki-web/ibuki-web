@@ -10,7 +10,6 @@ commentView : CommentModel -> Html {}
 commentView model =
   div [class "panel panel-default com"] [
     commentAttrView model
-  , div [class "divider"] []
   , commentBodyView model
   ]
 
@@ -18,23 +17,28 @@ commentView model =
 commentAttrView : CommentModel -> Html {}
 commentAttrView model =
   let
-    id = idOfCommentLens.get model
-    name = nameOfCommentLens.get model
-    topicName = topicNameLens.get model
-    isImportant = isImportantLens.get model
-    stared = staredLens.get model
-    date = dateLens.get model
+    id =
+      idOfCommentLens.get model
+
+    name =
+      nameOfCommentLens.get model
+
+    topicName =
+      topicNameLens.get model
+
+    isImportant =
+      isImportantLens.get model
+
+    stared =
+      staredLens.get model
+
+    date =
+      dateLens.get model
   in
     div [class "panel-body"] [
       div [class "topic-attr"] [
         div [class "attribute-text topic-name"] [
           text topicName
-        ]
-      , div [class "attribute-img important-marker"] [
-          if isImportant then
-            img [src "./static/img/attention-sign.svg"] []
-          else
-            span [] []
         ]
       ]
 
@@ -45,19 +49,10 @@ commentAttrView model =
       , div [class "attribute-text user-name"] [
           text name
         ]
-      , div [class "attribute-text user-id"] [
-          text id
-        ]
       ]
 
     , div [class "comment-attr"] [
-        div [class "attribute-img like"] [
-          if stared then
-            img [src "./static/img/star.svg"] []
-          else
-            span [] []
-        ]
-      , div [class "attribute-text date"] [
+        div [class "attribute-text date"] [
           text date
         ]
       ]
@@ -67,14 +62,14 @@ commentAttrView model =
 commentBodyView : CommentModel -> Html {}
 commentBodyView model =
   let
-    title = getOrElse (titleOpt.getOption model) "[NoTitle]"
-    body = bodyLens.get model
+    title =
+      getOrElse (titleOpt.getOption model) "[NoTitle]"
+
+    body =
+      bodyLens.get model
   in
     div [class "panel-body"] [
-      div [class "title"] [
-        text title
-      ]
-    , div [class "body"] [
+      div [class "body"] [
         text body
       ]
     ]

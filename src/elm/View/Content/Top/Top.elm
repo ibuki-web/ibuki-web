@@ -19,6 +19,7 @@ logo : Html TopMessage
 logo =
   img [src "./static/img/leaves.svg", style styles.logo] []
 
+
 styles : {  top: Style
           , centerize : Style
           , background: Style

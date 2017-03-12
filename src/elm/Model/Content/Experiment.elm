@@ -2,9 +2,9 @@ module Model.Content.Experiment exposing (..)
 
 import Monocle.Lens exposing (Lens)
 
-type alias ExperimentModel = {
+type alias ExperimentModel =
+  {}
 
-  }
 
 initialExperimentModel : ExperimentModel
 initialExperimentModel =

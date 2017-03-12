@@ -41,13 +41,16 @@ contentUpdate message model =
     , experimentPartialUpdater
     ]) model
 
+
 routeUpdate : ContentMessage -> ContentModel -> (ContentModel, Cmd ContentMessage)
 routeUpdate message model =
   (case message of
     ChangeLocation location ->
       case parseLocation location of
-        NoRoute -> model
+        NoRoute ->
+          model
 
-        _ as loc -> routeLens.set loc model
+        _ as loc ->
+          routeLens.set loc model
 
     _ -> model, Cmd.none)

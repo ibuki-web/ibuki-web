@@ -11,15 +11,21 @@ type alias UserModel =
 idLens : Lens UserModel String
 idLens =
   let
-    get m = m.id
-    set i m = { m | id = i }
+    get m =
+      m.id
+
+    set i m =
+      { m | id = i }
   in
     Lens get set
 
 nameLens : Lens UserModel String
 nameLens =
   let
-    get m = m.name
-    set n m = { m | name = n }
+    get m =
+      m.name
+
+    set n m =
+      { m | name = n }
   in
     Lens get set

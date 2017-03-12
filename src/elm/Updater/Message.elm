@@ -17,9 +17,14 @@ headerMessageOpt =
   let
     getOption v =
       case v of
-        FromHeader message -> Just message
-        _ -> Nothing
-    set h v = FromHeader h
+        FromHeader message ->
+          Just message
+
+        _ ->
+          Nothing
+
+    set h v =
+      FromHeader h
   in
     Optional getOption set
 
@@ -29,8 +34,13 @@ contentMessageOpt =
   let
     getOption v =
       case v of
-        FromContent message -> Just message
-        _ -> Nothing
-    set c v = FromContent c
+        FromContent message ->
+          Just message
+
+        _ ->
+          Nothing
+
+    set c v =
+      FromContent c
   in
     Optional getOption set

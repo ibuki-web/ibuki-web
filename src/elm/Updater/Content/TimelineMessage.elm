@@ -23,4 +23,5 @@ mockComment =
   }
 
 onClickAddCommentButton : TimelineMessage
-onClickAddCommentButton = AddComment mockComment
+onClickAddCommentButton =
+  AddComment mockComment

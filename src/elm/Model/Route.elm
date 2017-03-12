@@ -1,23 +1,27 @@
 module Model.Route exposing (..)
 
 import Navigation exposing (..)
+import Resource.Route exposing (routes)
 import UrlParser exposing (..)
 
 type Route
   = NoRoute
   | Top
-  | Hoge
+  | Timeline
   | Experiment
 
+
 (||>) path route = path |> map route
+
 
 matchers : Parser (Route -> a) a
 matchers =
     oneOf [
-      s ""            ||> Top
-    , s "experiment"  ||> Experiment
-    , s "hoge"        ||> Hoge
+      s routes.top        ||> Top
+    , s routes.experiment ||> Experiment
+    , s routes.timeline   ||> Timeline
     ]
+
 
 parseLocation : Location -> Route
 parseLocation location =

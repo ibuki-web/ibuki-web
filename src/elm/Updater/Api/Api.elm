@@ -92,8 +92,8 @@ jsonBodyExpect decoder rr =
 
 
 isAllowedParams : (Param -> Bool) -> List Param -> Bool
-isAllowedParams p params =
-  List.all p params
+isAllowedParams =
+  List.all
 
 
 attachParams : Url -> List Param -> Url
